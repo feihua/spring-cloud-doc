@@ -1,3 +1,43 @@
+
+```text
+Nginx 的默认安装目录包括但不限于：
+
+配置文件目录：/etc/nginx
+
+主配置文件：/etc/nginx/nginx.conf
+
+默认服务器根目录：/usr/share/nginx/html
+
+日志文件目录：/var/log/nginx
+
+默认的 PID 文件位置：/var/run/nginx.pid
+
+二进制文件位置：/usr/sbin/nginx
+
+相关命令： 
+systemctl enable nginx
+systemctl start nginx
+systemctl status nginx
+```
+
+```text
+location /api {
+		proxy_set_header Host $host;
+		proxy_set_header X-Real-IP $remote_addr;
+		proxy_set_header REMOTE-HOST $remote_addr;
+		proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+		proxy_pass http://127.0.0.1:8600;
+	}
+```
+
+```text
+location ^~ /antd{
+		alias html/antd;
+		index index.html; 
+		try_files $uri $uri/ /antd/index.html;
+		}
+		
+```
 # Markdown Extension Examples
 
 This page demonstrates some of the built-in markdown extensions provided by VitePress.

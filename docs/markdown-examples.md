@@ -60,10 +60,53 @@ aaad6cc16374442ab8b3a8ee0d5c870a123
 ```
 
 ```shell
-
+pipeline {
+    agent any
+    stages {
+        stage('Checkout') {
+            steps {
+               sh 'echo clean package'
+            }
+        }
+        stage('Build') {
+            steps {
+                sh 'echo clean package'
+            }
+        }
+        stage('Test') {
+            steps {
+                sh 'echo test'
+            }
+        }
+        stage('Deploy') {
+            steps {
+                sh 'echo deployment.yaml'
+            }
+        }
+    }
+}
 
 ```
 
+```shell
+pipeline {
+    agent any
+
+    stages {
+        stage('clone') {
+            steps {
+                sh 'git clone https://gitee.com/liufeihua/spring-cloud-tpl.git'
+            }
+        }
+        stage('gradle build') {
+            steps {
+                sh './gradlew bootJart'
+            }
+        }
+    }
+}
+
+```
 
 # Markdown Extension Examples
 

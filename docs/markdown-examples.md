@@ -38,6 +38,33 @@ location ^~ /antd{
 		}
 		
 ```
+
+jdk安装
+```shell
+export JAVA_HOME=/root/jdk
+export CLASSPATH=$JAVA_HOME/lib:$CLASSPATH
+export PATH=$JAVA_HOME/bin:$PATH
+```
+```shell
+docker run --network=host --name jenkins -v jenkins_home:/var/jenkins_home -d jenkins/jenkins:lts
+
+docker logs -f docker-jenkins
+
+# 进去容器
+docker exec -it docker-jenkins /bin/bash
+# 获取解锁密码
+cat /var/jenkins_home/secrets/initialAdminPassword
+
+aaad6cc16374442ab8b3a8ee0d5c870a123
+
+```
+
+```shell
+
+
+```
+
+
 # Markdown Extension Examples
 
 This page demonstrates some of the built-in markdown extensions provided by VitePress.

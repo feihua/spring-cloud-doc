@@ -39,6 +39,17 @@ location ^~ /antd{
 		
 ```
 
+```shell
+        location /zero/ {
+                proxy_set_header Host $host;
+                proxy_set_header X-Real-IP $remote_addr;
+                proxy_set_header REMOTE-HOST $remote_addr;
+                proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+                proxy_pass http://127.0.0.1:8888/;
+        }
+        
+```
+
 jdk安装
 ```shell
 export JAVA_HOME=/root/jdk
@@ -57,7 +68,9 @@ cat /var/jenkins_home/secrets/initialAdminPassword
 
 aaad6cc16374442ab8b3a8ee0d5c870a123
 
+8b59ee73a8fa48ca83dbf1f09cedee0d
 ```
+
 
 ```shell
 pipeline {
@@ -106,8 +119,32 @@ pipeline {
     }
 }
 
-```
+pipeline {
+    agent any
 
+    stages {
+        stage('clone') {
+            steps {
+                sh 'rm -rf demo1'
+                sh 'git clone https://gitee.com/liufeihua/demo1.git'
+                sh 'cd demo1 && gradle build'
+            }
+        }
+
+    }
+}
+```
+```shell
+        stage('start sys-rpc') {
+            steps {
+                withEnv(['JENKINS_NODE_COOKIE=dontkillme]']) {
+                    sh '''
+                        nohup ./target/sys-rpc/sys-rpc -f ./target/sys-rpc/sys-rpc.yaml  > /dev/null 2>&1 &
+                    '''
+                }
+            }
+        }
+```
 # Markdown Extension Examples
 
 This page demonstrates some of the built-in markdown extensions provided by VitePress.

@@ -18,7 +18,11 @@ export default defineConfig({
                 text: 'Examples',
                 items: [
                     {text: 'Markdown Examples', link: '/markdown-examples'},
-                    {text: 'Runtime API Examples', link: '/api-examples'}
+                    {text: 'Runtime API Examples', link: '/api-examples'},
+                    {text: 'java', link: '/java'},
+                    {text: 'rust', link: '/rust'},
+                    {text: 'tpl', link: '/tpl'},
+                    {text: 'zero', link: '/zero'}
                 ]
             },
             {

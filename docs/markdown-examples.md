@@ -40,14 +40,24 @@ location ^~ /antd{
 ```
 
 ```shell
-        location /zero/ {
+        location /api {
                 proxy_set_header Host $host;
                 proxy_set_header X-Real-IP $remote_addr;
                 proxy_set_header REMOTE-HOST $remote_addr;
                 proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-                proxy_pass http://127.0.0.1:8888/;
+                proxy_pass http://127.0.0.1:8888;
         }
-        
+        location ^~ /mall{
+                alias html/mall;
+                index index.html; 
+                try_files $uri $uri/ /mall/index.html;
+                }
+                
+        location ^~ /vue{
+                alias html/vue;
+                index index.html; 
+                try_files $uri $uri/ /vue/index.html;
+                }         
 ```
 
 jdk安装
@@ -230,3 +240,4 @@ This is a details block.
 ## More
 
 Check out the documentation for the [full list of markdown extensions](https://vitepress.dev/guide/markdown).
+bac40ad508b44bcdb752ba76d0d0fb49
